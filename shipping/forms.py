@@ -37,6 +37,17 @@ class DimensionUnitFormMixin:
 
 
 class ProductForm(DimensionUnitFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["sku"].widget.attrs.update(
+            {
+                "pattern": "[A-Z0-9]+",
+                "title": "Use capital letters and numbers only.",
+                "oninput": "this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')",
+                "autocomplete": "off",
+            }
+        )
+
     class Meta:
         model = Product
         fields = [

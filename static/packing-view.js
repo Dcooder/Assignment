@@ -10,6 +10,7 @@
   let rotation = -0.65,
     tilt = 0.48,
     zoom = 1,
+    baseScale = 1,
     dragging = false,
     point = null;
   const dimensions = [
@@ -33,8 +34,8 @@
     const rx = x * c - y * s,
       ry = x * s + y * c;
     return [
-      canvas.width / 2 + rx * 1.05 * zoom,
-      canvas.height * 0.62 + (ry * st - z * ct) * zoom,
+      canvas.width / 2 + rx * 1.05 * baseScale * zoom,
+      canvas.height * 0.62 + (ry * st - z * ct) * baseScale * zoom,
     ];
   };
   const drawCuboid = (origin, dims, color, alpha) => {
@@ -80,13 +81,10 @@
     canvas.height = rect.height * devicePixelRatio;
     context.lineWidth = devicePixelRatio;
     context.clearRect(0, 0, canvas.width, canvas.height);
-    const scale = Math.min(
+    baseScale = Math.min(
       (canvas.width / (dimensions[0] + dimensions[1])) * 0.65,
       (canvas.height / (dimensions[1] + dimensions[2])) * 0.65,
     );
-    zoom = zoom || scale;
-    const oldZoom = zoom;
-    zoom = scale * (oldZoom / scale);
     drawCuboid([0, 0, 0], dimensions, "#5f8f9b", 10);
     packing.placements.forEach((placement, index) =>
       drawCuboid(
