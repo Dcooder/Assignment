@@ -7,6 +7,7 @@
     <title>{% block title %}Parcel Fit{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml" />
     <link rel="stylesheet" href="{% static 'app.css' %}" />
+    <script src="{% static 'messages.js' %}" defer></script>
   </head>
   <body class="app-shell">
     <header>
@@ -26,9 +27,17 @@
       </nav>
     </header>
     <main>
-      {% if messages %} {% for message in messages %}
-      <div class="message {{ message.tags }}" role="status">{{ message }}</div>
-      {% endfor %} {% endif %} {% block content %}{% endblock %}
+      {% if messages %}
+        <div class="notifications" aria-live="polite" aria-atomic="true">
+          {% for message in messages %}
+            <div class="message {{ message.tags }}" role="status">
+              <span>{{ message }}</span>
+              <button class="message-close" type="button" aria-label="Dismiss notification">×</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
     </main>
   </body>
 </html>

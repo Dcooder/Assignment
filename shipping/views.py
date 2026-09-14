@@ -61,7 +61,8 @@ def product_toggle(request, pk):
     product.is_active = not product.is_active
     product.save()
     messages.success(
-        request, f"Product {'activated' if product.is_active else 'deactivated'}."
+        request,
+        f"Product {'activated' if product.is_active else 'deactivated'} successfully.",
     )
     return redirect("product_list")
 

@@ -126,6 +126,8 @@ h3 {
   font: inherit;
   font-weight: 750;
   cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease, transform 160ms ease;
 }
 .primary {
   background: var(--green);
@@ -133,6 +135,11 @@ h3 {
 }
 .primary:hover {
   background: #78d8b5;
+}
+.row-actions .button.primary:hover {
+  background: #8ae6c3;
+  box-shadow: 0 5px 12px #51c39a45;
+  transform: translateY(-1px);
 }
 .secondary {
   background: var(--surface-2);
@@ -494,17 +501,59 @@ dd {
   color: var(--muted);
 }
 .message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   background: #16382d;
   color: #abefd2;
   border: 1px solid #2a7358;
-  padding: 12px 15px;
+  padding: 12px 14px 12px 15px;
   border-radius: 8px;
   margin-bottom: 18px;
+  box-shadow: 0 8px 22px #00000024;
+  animation: notification-in 220ms ease-out;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+.notifications {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.message.is-dismissing {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.message-close {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: currentColor;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.message-close:hover {
+  border-color: currentColor;
+  background: #ffffff12;
 }
 .message.warning {
   background: #3a301d;
   color: #f8da92;
   border-color: #735a25;
+}
+@keyframes notification-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .quantity-form {
   display: flex;
@@ -686,5 +735,8 @@ dd {
   }
   .form {
     padding: 20px;
+  }
+  .message {
+    align-items: flex-start;
   }
 }

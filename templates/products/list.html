@@ -36,10 +36,7 @@
         <tr>
           <td>{{ product.name }}</td>
           <td>{{ product.sku }}</td>
-          <td>
-            {{ product.displayed_dimensions }} {{
-            product.get_dimension_unit_display }}
-          </td>
+          <td>{{ product.displayed_dimensions }} {{ product.get_dimension_unit_display }}</td>
           <td>{{ product.weight }} kg</td>
           <td>
             <span class="badge {% if product.is_active %}recommended{% else %}no_solution{% endif %}">
