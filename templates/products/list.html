@@ -1,0 +1,108 @@
+{% extends 'base.html' %} {% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">CATALOGUE</p>
+    <h1>Products</h1>
+    <p>
+      Dimensions are stored canonically and displayed in each product’s chosen
+      unit.
+    </p>
+  </div>
+  <a class="button primary" href="{% url 'product_create' %}">Add product</a>
+</div>
+
+<form class="search">
+  <label for="q">Search products</label>
+  <input id="q" name="q" value="{{ query }}" placeholder="Name or SKU" />
+  <button class="button secondary">Search</button>
+</form>
+
+<section class="panel">
+  {% if products %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>SKU</th>
+          <th>Dimensions</th>
+          <th>Weight</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.sku }}</td>
+          <td>
+            {{ product.displayed_dimensions }} {{
+            product.get_dimension_unit_display }}
+          </td>
+          <td>{{ product.weight }} kg</td>
+          <td>
+            <span class="badge {% if product.is_active %}recommended{% else %}no_solution{% endif %}">
+              {% if product.is_active %}Active{% else %}Inactive{% endif %}
+            </span>
+          </td>
+          <td class="row-actions">
+            {% if product.is_active %}
+            <form method="post" action="{% url 'cart_add' product.pk %}">
+              {% csrf_token %}<input
+                type="hidden"
+                name="next"
+                value="{{ request.get_full_path }}"
+              /><button class="button mini primary">Add to cart</button>
+            </form>
+            {% endif %}
+            <a
+              class="icon-button"
+              href="{% url 'product_edit' product.pk %}"
+              title="Edit product"
+              aria-label="Edit product"
+              >✎</a
+            >
+            <form
+              method="post"
+              action="{% url 'product_toggle' product.pk %}"
+              onsubmit="return confirm('Change this product status?');"
+            >
+              {% csrf_token %}
+              {% if product.is_active %}
+              <button class="status-action" title="Deactivate product">Deactivate</button>
+              {% else %}
+              <button class="status-action" title="Activate product">Activate</button>
+              {% endif %}
+            </form>
+            <form
+              method="post"
+              action="{% url 'product_delete' product.pk %}"
+              onsubmit="
+                return confirm(
+                  'Delete this product? Historical products are safely deactivated.',
+                );
+              "
+            >
+              {% csrf_token %}<button
+                class="icon-button danger-link"
+                title="Delete product"
+                aria-label="Delete product"
+              >
+                ⌫
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty">
+    <h3>No products yet.</h3>
+    <p>Add products before creating an order.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
