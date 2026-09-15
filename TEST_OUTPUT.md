@@ -7,9 +7,9 @@ python manage.py check
 System check identified no issues (0 silenced).
 
 python manage.py test -v 1
-Found 36 test(s).
+Found 37 test(s).
 ----------------------------------------------------------------------
-Ran 36 tests in 3.537s
+Ran 37 tests in 3.276s
 
 OK
 System check identified no issues (0 silenced).

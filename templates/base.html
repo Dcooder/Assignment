@@ -9,34 +9,45 @@
     <link rel="stylesheet" href="{% static 'app.css' %}" />
     <script src="{% static 'messages.js' %}" defer></script>
   </head>
+
   <body class="app-shell">
     <header>
       <nav>
         <a class="brand" href="{% url 'dashboard' %}">
           <span>◈</span> Parcel Fit
         </a>
+
         <div class="navlinks">
           <a href="{% url 'dashboard' %}">Overview</a>
           <a href="{% url 'order_list' %}">Orders</a>
           <a href="{% url 'product_list' %}">Products</a>
           <a href="{% url 'box_list' %}">Boxes</a>
         </div>
+
         <a class="cart-link" href="{% url 'cart_detail' %}">
           Order cart <b>{{ cart_count }}</b>
         </a>
       </nav>
     </header>
+
     <main>
       {% if messages %}
         <div class="notifications" aria-live="polite" aria-atomic="true">
           {% for message in messages %}
             <div class="message {{ message.tags }}" role="status">
               <span>{{ message }}</span>
-              <button class="message-close" type="button" aria-label="Dismiss notification">×</button>
+              <button
+                class="message-close"
+                type="button"
+                aria-label="Dismiss notification"
+              >
+                ×
+              </button>
             </div>
           {% endfor %}
         </div>
       {% endif %}
+
       {% block content %}{% endblock %}
     </main>
   </body>

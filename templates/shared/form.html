@@ -1,43 +1,50 @@
-{% extends 'base.html' %} {% block content %}
-<div class="narrow">
-  <div class="form-heading">
-    <p class="eyebrow">CONFIGURATION</p>
-    <h1>{{ title }}</h1>
-    <p>
-      Keep catalogue details accurate so packing recommendations stay reliable.
-    </p>
-  </div>
+{% extends 'base.html' %}
 
-  <form method="post" class="panel form">
-    {% csrf_token %}
-    <div class="form-grid">
-      {% for field in form %}
-      {% if field.name == "is_active" %}
-      <div class="checkbox-field">
-        {{ field }}
-        <div>
-          {{ field.label_tag }}
-          <small>Allow this item to be used in new orders and recommendations.</small>
-        </div>
-      </div>
-      {% else %}
-      <div
-        class="field"
-      >
-        {{ field.label_tag }} {{ field }} {% if field.help_text %}<small
-          >{{ field.help_text }}</small
-        >{% endif %} {% for error in field.errors %}
-        <p class="error">{{ error }}</p>
+{% block content %}
+  <div class="narrow">
+    <div class="form-heading">
+      <p class="eyebrow">CONFIGURATION</p>
+      <h1>{{ title }}</h1>
+      <p>
+        Keep catalogue details accurate so packing recommendations stay reliable.
+      </p>
+    </div>
+
+    <form method="post" class="panel form">
+      {% csrf_token %}
+
+      <div class="form-grid">
+        {% for field in form %}
+          {% if field.name == "is_active" %}
+            <div class="checkbox-field">
+              {{ field }}
+              <div>
+                {{ field.label_tag }}
+                <small>
+                  Allow this item to be used in new orders and recommendations.
+                </small>
+              </div>
+            </div>
+          {% else %}
+            <div class="field">
+              {{ field.label_tag }} {{ field }}
+
+              {% if field.help_text %}
+                <small>{{ field.help_text }}</small>
+              {% endif %}
+
+              {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
-      {% endif %}
-      {% endfor %}
-    </div>
 
-    <div class="actions">
-      <a class="button secondary" href="{% url cancel_url %}">Cancel</a>
-      <button class="button primary" type="submit">Save changes</button>
-    </div>
-  </form>
-</div>
+      <div class="actions">
+        <a class="button secondary" href="{% url cancel_url %}">Cancel</a>
+        <button class="button primary" type="submit">Save changes</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}

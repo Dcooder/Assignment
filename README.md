@@ -11,7 +11,7 @@ A small internal Django tool for selecting a shipping box for a multi-product ec
 - Per-box explanations for suitability or rejection.
 - Dashboard, order history, responsive server-rendered interface, and Django admin.
 - Actual placement data rendered in an interactive canvas-based 3D packing view; the browser never decides packing.
-- 36 focused automated tests plus a GitHub Actions workflow.
+- 37 automated tests plus a GitHub Actions workflow.
 
 ## Units and selection rule
 
@@ -76,4 +76,4 @@ The heuristic intentionally trades exhaustive packing completeness for predictab
 
 ## What did you learn?
 
-[AUTHOR MUST WRITE THIS SECTION MANUALLY — DO NOT GENERATE WITH AI]
+I have been able to learn how to design models for products, boxes and order items and link them to a realistc business need. The most difficult thins was how to put the logic of recommending boxes into place, particularly with regard to the size of the products, rotation of products, number of products, weight capacity and products in the same order.

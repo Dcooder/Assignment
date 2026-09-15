@@ -210,6 +210,13 @@ class RecommendationTests(TestCase):
             },
         )
 
+    def test_empty_order_returns_no_suitable_box(self):
+        box_instance = box(code="B", shipping_cost=D("5"))
+        box_instance.save()
+
+        self.assertIsNone(recommend([], [box_instance])[0])
+        self.assertEqual(recommend([], [box_instance])[1], [])
+
     def test_cheapest_suitable_selected(self):
         item = self.make_order_item()
         cheap = box(code="C", shipping_cost=D("5"))

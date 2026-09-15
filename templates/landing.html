@@ -1,45 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="landing">
-	<nav class="landing-nav">
-		<a class="brand" href="{% url 'dashboard' %}">◈ Parcel Fit</a>
-		<a class="button secondary" href="{% url 'dashboard' %}">Open workspace</a>
-	</nav>
-	<div class="hero">
-		<div>
-			<p class="eyebrow">WAREHOUSE INTELLIGENCE</p>
-			<h1>Every shipment deserves the right fit.</h1>
-			<p>Parcel Fit turns physical product data into explainable, reliable shipping-box recommendations for warehouse teams.</p>
-			<div class="actions">
-				<a class="button primary" href="{% url 'dashboard' %}">Get started</a>
-				<a class="button text" href="{% url 'dashboard' %}">Open workspace →</a>
-			</div>
-		</div>
-		<div class="packing-art" aria-label="Illustration of boxes packed inside a shipping carton">
-			<i class="carton"></i>
-			<i class="parcel one"></i>
-			<i class="parcel two"></i>
-			<i class="parcel three"></i>
-			<span>rotation-aware<br>physical packing</span>
-		</div>
-	</div>
-	<div class="landing-points">
-		<div>
-			<b>01</b>
-			<strong>Physical fit</strong>
-			<span>Actual 3D dimensions, not volume guesses.</span>
-		</div>
-		<div>
-			<b>02</b>
-			<strong>Cost first</strong>
-			<span>Lowest suitable shipping cost wins.</span>
-		</div>
-		<div>
-			<b>03</b>
-			<strong>Explainable</strong>
-			<span>Every recommendation and rejection is clear.</span>
-		</div>
-	</div>
-</section>
+  <section class="landing">
+    <nav class="landing-nav">
+      <a class="brand" href="{% url 'dashboard' %}">◈ Parcel Fit</a>
+      <a class="button secondary" href="{% url 'dashboard' %}">Open workspace</a>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <p class="eyebrow">WAREHOUSE INTELLIGENCE</p>
+        <h1>Every shipment deserves the right fit.</h1>
+        <p>
+          Parcel Fit turns physical product data into explainable, reliable
+          shipping-box recommendations for warehouse teams.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="{% url 'dashboard' %}">Get started</a>
+          <a class="button text" href="{% url 'dashboard' %}">Open workspace →</a>
+        </div>
+      </div>
+
+      <div
+        class="packing-art"
+        aria-label="Illustration of boxes packed inside a shipping carton"
+      >
+        <i class="carton"></i>
+        <i class="parcel one"></i>
+        <i class="parcel two"></i>
+        <i class="parcel three"></i>
+        <span>rotation-aware<br />physical packing</span>
+      </div>
+    </div>
+
+    <div class="landing-points">
+      <div>
+        <b>01</b>
+        <strong>Physical fit</strong>
+        <span>Actual 3D dimensions, not volume guesses.</span>
+      </div>
+
+      <div>
+        <b>02</b>
+        <strong>Cost first</strong>
+        <span>Lowest suitable shipping cost wins.</span>
+      </div>
+
+      <div>
+        <b>03</b>
+        <strong>Explainable</strong>
+        <span>Every recommendation and rejection is clear.</span>
+      </div>
+    </div>
+  </section>
 {% endblock %}
